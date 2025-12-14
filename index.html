@@ -1,237 +1,139 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>连接字符串生成器（本地展示）</title>
-<style>
-  :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#9aa4b2;--text:#e6eef6}
-  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,Arial;background:linear-gradient(180deg,#071024 0%,#07182a 100%);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-  .wrap{max-width:980px;width:100%}
-  header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
-  h1{margin:0;font-size:20px}
-  p.lead{margin:0;color:var(--muted);font-size:13px}
-  .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-  .field{display:flex;flex-direction:column;margin-bottom:10px}
-  label{font-size:13px;color:var(--muted);margin-bottom:6px}
-  input[type=text], textarea, select{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:var(--text);outline:none}
-  textarea{min-height:120px;resize:vertical}
-  .row{display:flex;gap:8px}
-  button{background:var(--accent);color:white;border:none;padding:10px 12px;border-radius:8px;cursor:pointer}
-  button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
-  small.muted{color:var(--muted)}
-  .output{font-family:monospace;background:rgba(0,0,0,0.35);padding:12px;border-radius:8px;color:#cfeaff;white-space:pre-wrap;word-break:break-word}
-  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  footer{margin-top:12px;color:var(--muted);font-size:12px}
-  @media (max-width:900px){.grid{grid-template-columns:1fr;}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>爱护鱼类 · 守护蓝色生命</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      background: linear-gradient(to bottom, #0f4c75, #1b6ca8);
+      color: #ffffff;
+    }
+    header {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+    section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 26px;
+      color: #e0f7fa;
+    }
+    .card p {
+      line-height: 1.8;
+      font-size: 16px;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .action {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+    }
+    .action span {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      font-size: 14px;
+      opacity: 0.85;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        <h1>连接字符串生成器（本地展示）</h1>
-        <p class="lead">在浏览器本地生成并查看示例连接 URI 与 Base64（安全演示，**不建立连接**）。</p>
-      </div>
-    </header>
+  <header>
+    <h1>爱护鱼类</h1>
+    <p>守护蓝色生命 · 共建健康水生态</p>
+  </header>
 
-    <div class="grid">
-      <div class="card">
-        <div class="field">
-          <label>UUID</label>
-          <input id="uuid" type="text" placeholder="例如：f2c46071-..." value="">
+  <section>
+    <div class="card">
+      <h2>为什么要爱护鱼类？</h2>
+      <p>
+        鱼类是水生态系统的重要组成部分，它们维持着水体的生态平衡，
+        是人类重要的食物来源和自然资源。过度捕捞、水体污染和栖息地破坏，
+        正在严重威胁鱼类的生存。
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>鱼类面临的主要威胁</h2>
+      <div class="actions">
+        <div class="action">
+          <span>🎣</span>
+          <p>过度捕捞导致种群数量急剧下降</p>
         </div>
-
-        <div class="row">
-          <div style="flex:1">
-            <div class="field">
-              <label>域名 / IP (DOMAIN)</label>
-              <input id="domain" type="text" placeholder="example.com">
-            </div>
-          </div>
-          <div style="width:140px">
-            <div class="field">
-              <label>端口</label>
-              <input id="port" type="text" placeholder="443" value="443">
-            </div>
-          </div>
+        <div class="action">
+          <span>🏭</span>
+          <p>工业和生活污水污染水体</p>
         </div>
-
-        <div class="field">
-          <label>WebSocket 路径 (WSPATH)</label>
-          <input id="wspath" type="text" placeholder="ws-path" value="ws">
+        <div class="action">
+          <span>🔥</span>
+          <p>气候变化影响水温与繁殖</p>
         </div>
-
-        <div class="row">
-          <div style="flex:1">
-            <div class="field">
-              <label>服务名/备注 (NAME)</label>
-              <input id="name" type="text" placeholder="my-node" value="my-node">
-            </div>
-          </div>
-          <div style="width:140px">
-            <div class="field">
-              <label>ISP（可选）</label>
-              <input id="isp" type="text" placeholder="ISP" value="">
-            </div>
-          </div>
-        </div>
-
-        <div class="field">
-          <label>要包含的协议（勾选以生成）</label>
-          <div style="display:flex;gap:8px">
-            <label style="display:flex;align-items:center;gap:6px"><input id="genVless" type="checkbox" checked> VLESS</label>
-            <label style="display:flex;align-items:center;gap:6px"><input id="genTrojan" type="checkbox" checked> Trojan (示例样式)</label>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button id="generateBtn">生成</button>
-          <button id="copyAll" class="ghost">复制全部文本</button>
-          <button id="downloadTxt" class="ghost">下载为 TXT</button>
-        </div>
-
-        <div style="margin-top:12px">
-          <small class="muted">注意：此页面仅生成文本/示例，不会建立任何网络连接或执行程序。</small>
-        </div>
-      </div>
-
-      <div class="card">
-        <div>
-          <label>生成的连接字符串</label>
-          <div id="outputUris" class="output">点击“生成”以显示结果</div>
-        </div>
-
-        <div style="margin-top:12px">
-          <label>合并后的 Base64（示例：多条 URI 用换行分隔后编码）</label>
-          <div id="outputBase64" class="output"></div>
-        </div>
-
-        <div style="margin-top:10px; display:flex; gap:8px;">
-          <button id="copyUris">复制 URI</button>
-          <button id="copyBase64" class="ghost">复制 Base64</button>
+        <div class="action">
+          <span>🧨</span>
+          <p>非法电鱼、炸鱼破坏生态</p>
         </div>
       </div>
     </div>
 
-    <footer>
-      <div>安全声明：请勿将此工具用于未经授权的代理或绕过安全控制。如需远程运维或隧道服务，请使用经授权的商业/开源解决方案并遵守法律与组织策略。</div>
-    </footer>
-  </div>
+    <div class="card">
+      <h2>我们可以做什么？</h2>
+      <div class="actions">
+        <div class="action">
+          <span>🚯</span>
+          <p>不向河流湖泊乱扔垃圾</p>
+        </div>
+        <div class="action">
+          <span>📢</span>
+          <p>举报非法捕捞行为</p>
+        </div>
+        <div class="action">
+          <span>🐟</span>
+          <p>拒绝食用濒危鱼类</p>
+        </div>
+        <div class="action">
+          <span>🌱</span>
+          <p>支持生态修复和放流活动</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-(function(){
-  const el = id => document.getElementById(id);
-  const uuidEl = el('uuid'), domainEl = el('domain'), portEl = el('port'), wspEl = el('wspath'),
-        nameEl = el('name'), ispEl = el('isp'), vlessChk = el('genVless'), trojanChk = el('genTrojan');
-
-  function safeTrim(s){ return (s||'').toString().trim(); }
-
-  function makeVless(uuid, domain, port, wsp, name, isp){
-    // VLESS 示例（显示用途）
-    const pathEnc = encodeURIComponent('/' + wsp);
-    const tag = name + (isp ? ('-' + isp) : '');
-    return `vless://${uuid}@${domain}:${port}?encryption=none&type=ws&path=${pathEnc}#${tag}`;
-  }
-  function makeTrojan(uuid, domain, port, wsp, name, isp){
-    // Trojan 风格示例（显示用途）
-    const pathEnc = encodeURIComponent('/' + wsp);
-    const tag = name + (isp ? ('-' + isp) : '');
-    // 注意：这里只是示例的 query 结构，用于可视化
-    return `trojan://${uuid}@${domain}:${port}?security=tls&sni=${domain}&path=${pathEnc}#${tag}`;
-  }
-
-  function toBase64(text){
-    try{
-      return btoa(unescape(encodeURIComponent(text)));
-    }catch(e){
-      // fallback for large strings
-      return window.btoa(text);
-    }
-  }
-
-  function fromBase64(b64){
-    try{ return decodeURIComponent(escape(window.atob(b64))); }catch(e){ return window.atob(b64); }
-  }
-
-  function generate(){
-    const uuid = safeTrim(uuidEl.value);
-    const domain = safeTrim(domainEl.value) || 'example.com';
-    const port = safeTrim(portEl.value) || '443';
-    const wsp = safeTrim(wspEl.value) || 'ws';
-    const name = safeTrim(nameEl.value) || 'my-node';
-    const isp = safeTrim(ispEl.value);
-
-    const items = [];
-    if (vlessChk.checked){
-      items.push(makeVless(uuid, domain, port, wsp, name, isp));
-    }
-    if (trojanChk.checked){
-      items.push(makeTrojan(uuid, domain, port, wsp, name, isp));
-    }
-    // also include a small human-readable block
-    const infoBlock = [
-      '# Generated by local viewer',
-      'UUID: ' + uuid,
-      'Domain: ' + domain,
-      'Port: ' + port,
-      'WSPATH: ' + wsp,
-      'NAME: ' + name,
-      'ISP: ' + (isp || '-'),
-      ''
-    ].join('\\n');
-
-    const allText = infoBlock + items.join('\\n');
-    el('outputUris').textContent = allText;
-    el('outputBase64').textContent = toBase64(allText);
-  }
-
-  // copy helpers
-  async function copyText(text){
-    try{
-      await navigator.clipboard.writeText(text);
-      return true;
-    }catch(e){
-      // fallback
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      try{ document.execCommand('copy'); }catch(e){}
-      document.body.removeChild(ta);
-      return false;
-    }
-  }
-
-  el('generateBtn').addEventListener('click', generate);
-  el('copyUris').addEventListener('click', ()=> copyText(el('outputUris').textContent));
-  el('copyBase64').addEventListener('click', ()=> copyText(el('outputBase64').textContent));
-  el('copyAll').addEventListener('click', ()=> {
-    const text = el('outputUris').textContent + '\\n\\nBase64:\\n' + el('outputBase64').textContent;
-    copyText(text);
-  });
-  el('downloadTxt').addEventListener('click', ()=>{
-    const blob = new Blob([el('outputUris').textContent], {type:'text/plain;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'connection-strings.txt';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(()=>URL.revokeObjectURL(url), 2000);
-  });
-
-  // Optional: populate UUID with a random placeholder for convenience (not a secure generator)
-  function randomUUID(){
-    // basic RFC4122 v4-like placeholder (browser has crypto.randomUUID in many browsers)
-    if (crypto && crypto.randomUUID) return crypto.randomUUID();
-    const s4 = ()=> Math.floor((1+Math.random())*0x10000).toString(16).substring(1);
-    return s4()+s4()+'-'+s4()+'-'+s4()+'-'+s4()+'-'+s4()+s4()+s4();
-  }
-  if(!uuidEl.value) uuidEl.value = randomUUID();
-
-  // initial generate
-  generate();
-})();
-</script>
+  <footer>
+    <p>让每一条鱼都能自由游弋 · 爱护鱼类 从你我做起</p>
+  </footer>
 </body>
 </html>
